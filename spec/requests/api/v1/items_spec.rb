@@ -4,28 +4,21 @@ require "rails_helper"
 RSpec.describe "Items", type: :request do
   describe "获取账目" do
     it "分页，未登录" do
-      user1 = create :user
-      user2 = create :user
-      create_list :item, 11, amount: 100, user: user1,
-                             tag_ids: [create(:tag, user: user1).id]
-      create_list :item, 11, amount: 100, user: user2,
-                             tag_ids: [create(:tag, user: user2).id]
+      create_list :item, 11, amount: 100
+      create_list :item, 11, amount: 100
       get "/api/v1/items"
       expect(response).to have_http_status 401
     end
     it "分页" do
-      user1 = create :user
-      tag1 = create :tag, user: user1
-      user2 = create :user
-      tag2 = create :tag, user: user2
-      create_list :item, Item.default_per_page + 1, user: user1, tag_ids: [tag1.id]
-      create_list :item, Item.default_per_page + 1, user: user2, tag_ids: [tag2.id]
-
-      get "/api/v1/items", headers: user1.generate_auth_header
+      user = create :user
+      items = create_list :item, Item.default_per_page + 1, user: user
+      create_list :item, 11
+      get "/api/v1/items", headers: items.first.user.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)
       expect(json["resources"].size).to eq Item.default_per_page
-      get "/api/v1/items?page=2", headers: user1.generate_auth_header
+      expect(json["resources"][0]["tags"].size).to eq 1
+      get "/api/v1/items?page=2", headers: user.generate_auth_header
       expect(response).to have_http_status 200
       json = JSON.parse(response.body)
       expect(json["resources"].size).to eq 1

@@ -7,10 +7,10 @@ class Api::V1::ItemsController < ApplicationController
     items = items.where(kind: params[:kind]) unless params[:kind].blank?
     items = items.page(params[:page])
     render json: { resources: items, pager: {
-      page: params[:page] || 1,
-      per_page: Item.default_per_page,
-      count: Item.count,
-    } }
+             page: params[:page] || 1,
+             per_page: Item.default_per_page,
+             count: Item.count,
+           } }, methods: :tags
   end
 
   def create
