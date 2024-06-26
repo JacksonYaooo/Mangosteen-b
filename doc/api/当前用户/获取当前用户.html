@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>标签 API</title>
+    <title>当前用户 API</title>
     <meta charset="utf-8">
     <style>
       
@@ -106,25 +106,25 @@ table th, table td {
   </head>
   <body>
     <div class="container">
-      <h1>标签 API</h1>
+      <h1>当前用户 API</h1>
 
       <div class="article">
-        <h2>删除标签</h2>
-        <h3>DELETE /api/v1/tags/:id</h3>
+        <h2>获取当前用户</h2>
+        <h3>GET /api/v1/me</h3>
 
 
 
           <h3>Request</h3>
 
             <h4>Headers</h4>
-            <pre class="request headers">Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozNDQsImV4cCI6MTcxOTQyMzA2N30.CJeAdScAWHcUu6WfD5b21XWplofLkq9kUn_KLUZBdS8
+            <pre class="request headers">Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjozMzgsImV4cCI6MTcxOTQyMzA2N30.IA_MRQRSodUOW5Z8J3x57pS78meDRsm1A62TyxykcQ4
 Accept: application/json
 Content-Type: application/json
 Host: example.org
 Cookie: </pre>
 
           <h4>Route</h4>
-          <pre class="request route highlight">DELETE /api/v1/tags/942</pre>
+          <pre class="request route highlight">GET /api/v1/me</pre>
 
 
 
@@ -137,13 +137,25 @@ X-Content-Type-Options: nosniff
 X-Download-Options: noopen
 X-Permitted-Cross-Domain-Policies: none
 Referrer-Policy: strict-origin-when-cross-origin
-Content-Type: application/json
-Cache-Control: no-cache
-X-Request-Id: 24159730-5ab9-43c6-b47e-8d2e0b97a25e
-X-Runtime: 0.006651
-Content-Length: 0</pre>
+Content-Type: application/json; charset=utf-8
+Vary: Accept
+ETag: W/&quot;50ae911c8fcb8e006e9fb96cf3063033&quot;
+Cache-Control: max-age=0, private, must-revalidate
+X-Request-Id: 0a795d20-ed51-4bf2-b6bb-a3e16c8b3572
+X-Runtime: 0.005281
+Content-Length: 150</pre>
             <h4>Status</h4>
             <pre class="response status">200 OK</pre>
+              <h4>Body</h4>
+              <pre class="response body">{
+  &quot;resource&quot;: {
+    &quot;id&quot;: 338,
+    &quot;email&quot;: &quot;natisha@predovic.example&quot;,
+    &quot;name&quot;: null,
+    &quot;created_at&quot;: &quot;2024-06-26T15:31:07.189Z&quot;,
+    &quot;updated_at&quot;: &quot;2024-06-26T15:31:07.189Z&quot;
+  }
+}</pre>
       </div>
     </div>
   </body>
